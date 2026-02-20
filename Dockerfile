@@ -28,6 +28,9 @@ COPY . .
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 RUN composer install --no-dev --optimize-autoloader
 
+RUN php artisan config:clear
+RUN php artisan cache:clear
+
 # Install Node dependencies and build assets
 RUN npm install
 RUN npm run production
